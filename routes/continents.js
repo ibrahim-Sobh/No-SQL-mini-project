@@ -15,7 +15,6 @@ Router.get('/',async (request,response)=>{
     
 })
 
-
     //Number of continents
     Router.get('/count',async(request,response)=>{
         const continents = await ContinentModel.count()
