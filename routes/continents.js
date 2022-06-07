@@ -22,6 +22,14 @@ Router.get('/',async (request,response)=>{
         return response.status(200).json({msg: "we have " + continents+ " continents"});
         });
 
+    Router.get('/countriescountsergio',async(request,response)=>{
+        const continents = await ContinentModel.aggregate(
+            [{
+                $addFields: { countryCount: {$size: '$countries'}}
+            }]);
+           return  response.status(200).json(continents);
+    });
+
     //Number of continents
     Router.get('/countriescount',async(request,response)=>{
         const continents = await ContinentModel.find()
@@ -35,6 +43,7 @@ Router.get('/',async (request,response)=>{
              });
              response.status(200).json(ContinetsWithCount);
         });
+
     
      Router.get('/filter/:filter',async(request,response)=>{
             const tofind = request.params.filter
